@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  warehouse:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bloomberg
+      - MYSQL_USER=sardor
+      - MYSQL_PASSWORD=root
+  bloomberg:
+    image: snavruzov/bloomberg
+    depends_on:
+      - warehouse
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=warehouse
+      - DATABASE_USER=sardor
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=bloomberg
+      - DATABASE_PORT=3306
+  frontweb:
+    image: snavruzov/bloomberg_web
+    ports:
+        - 4200:4200

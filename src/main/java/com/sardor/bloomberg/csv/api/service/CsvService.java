@@ -20,8 +20,6 @@ import java.util.concurrent.*;
  * Created by sardor.
  */
 
-
-
 public class CsvService implements Closeable {
     private final Logger logger = LoggerFactory.getLogger(CsvService.class);
 
