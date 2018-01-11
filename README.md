@@ -56,7 +56,12 @@ $ docker run -d \
     -p 4200:4200 \ 
     snavruzov/bloomberg_web
 ```
-Docker will Angular application listening 4200 port. To check if everything set OK go to the link http://localhost:4200
+Docker will deploy Angular application on 4200 port. To check if everything set OK go to the link http://localhost:4200
 Front-end Angular source codes can be found here: https://github.com/snavruzov/bloomberg_web
 
+Docker has a tool to simplify all deployments in one called Docker compose. With Docker compose you can compose a single configuration file that contains all configuration of all containers that have to be ran in order to execute your application.
+Check **docker-compose.yml** in the project base folder.
 
+```sh
+$ docker compose up
+```
