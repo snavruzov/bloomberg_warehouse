@@ -70,3 +70,11 @@ $ docker compose up
 You can find sample CSV files in the **src/test/java/resoureces**
 SpringBoot Test and Spring Mock are used to build test cases. 
 
+All tests ran with the following params:
+ - OS: Linux CentOS 7
+ - RAM: 8GB
+ - CPU: i7-4500U CPU @ 1.80GHz
+ - MySQL 5.6.38
+ - Java version "1.8.0_131"
+ - Benchmark: 100k CSV records in AVG. ~ 3.2 seconds
+ 
