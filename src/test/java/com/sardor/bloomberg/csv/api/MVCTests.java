@@ -1,6 +1,7 @@
 package com.sardor.bloomberg.csv.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sardor.bloomberg.csv.api.domain.CustomResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +21,9 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -98,7 +102,7 @@ public class MVCTests {
     }
 
     @Test
-    public void shouldFailUploadedFileIfExistSame() throws Exception {
+    public void shouldReturnCustomResponseIfFileExistSame() throws Exception {
         String csv = "hash,pickone,pickone,date,natural\n" +
                 "c9f40757dcfa783a35174ea321cb6a973c0f9549,UBA,,2017-10-12T23:45:30.384+0400,34343\n" +
                 "07c8f15069a038e1d69fa99544eae9b04126a3a4,EUR,EUR,2017-10-12T23:45:30.384+0400,8813";
@@ -108,6 +112,12 @@ public class MVCTests {
                         "text/csv", csv.getBytes());
         MvcResult resultMvc = this.mvc.perform(multipart("/api/upload").file(multipartFile))
                 .andExpect(status().isOk()).andReturn();
+        resultMvc.getRequest().getAsyncContext().setTimeout(5000);
+
+        resultMvc = this.mvc
+                .perform(asyncDispatch(resultMvc))
+                .andExpect(status().isOk()).andReturn();
+
         boolean reslt = resultMvc.getResponse().getContentAsString().contains("0004");
         Assertions.assertThat(reslt).isTrue();
     }
