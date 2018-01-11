@@ -65,3 +65,8 @@ Check **docker-compose.yml** in the project base folder.
 ```sh
 $ docker compose up
 ```
+
+### Testing
+You can find sample CSV files in the **src/test/java/resoureces**
+SpringBoot Test and Spring Mock are used to build test cases. 
+
