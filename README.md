@@ -69,6 +69,7 @@ $ docker compose up
 ### Testing
 You can find sample CSV files in the **src/test/java/resoureces**
 SpringBoot Test and Spring Mock are used to build test cases. 
+Demo page: http://173.249.12.140:4200/
 
 All tests ran with the following params:
  - OS: Linux CentOS 7
