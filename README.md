@@ -57,5 +57,6 @@ $ docker run -d \
     snavruzov/bloomberg_web
 ```
 Docker will Angular application listening 4200 port. To check if everything set OK go to the link http://localhost:4200
+Front-end Angular source codes can be found here: https://github.com/snavruzov/bloomberg_web
 
 
