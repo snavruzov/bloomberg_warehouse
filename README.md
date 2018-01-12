@@ -65,6 +65,12 @@ Check **docker-compose.yml** in the project base folder.
 ```sh
 $ docker compose up
 ```
+### Technologies
+ - Spring Boot Web for the RESTful service
+ - Asynchronous requests: *org.springframework.web.context.request.async*
+ - DB manipulations using JPA/Hibernate.
+ - Iterator interface to parse CSV data.
+ - Angular/RxJS 5 *Callable interfaces* to write async requests.
 
 ### Testing
 You can find sample CSV files in the **src/test/java/resoureces**
